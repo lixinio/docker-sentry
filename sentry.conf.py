@@ -324,3 +324,10 @@ if 'OPENID_CLIENT_ID' in os.environ:
     OPENID_CLIENT_SECRET = env('OPENID_CLIENT_SECRET')
     OPENID_AUTHORIZE_URL = env('OPENID_AUTHORIZE_URL')
     OPENID_TOKEN_URL = env('OPENID_TOKEN_URL')
+
+cassandra_servers = env('SENTRY_NODESTORE_CASSANDRA_SERVERS')
+if cassandra_servers:
+    SENTRY_NODESTORE = 'sentry.nodestore.cassandra.CassandraNodeStorage'
+    SENTRY_NODESTORE_OPTIONS = {
+        'servers': cassandra_servers.split(","),
+    }
